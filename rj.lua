@@ -1,4 +1,4 @@
-task.wait(1)
+repeat task.wait() until game:IsLoaded()
 print'did u trigger'
 
 local Players = game.Players
