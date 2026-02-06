@@ -9,4 +9,4 @@ if #Players:GetPlayers() <= 1 then
             TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, Players.LocalPlayer)
         end
 
-queue_on_teleport()
+queue_on_teleport(game:httpget("https://raw.githubusercontent.com/Laamy/app-releases/refs/heads/main/rj.lua"))
