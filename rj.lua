@@ -1,5 +1,5 @@
         local Players = game.Players
-local TeleportService = game.TeleportService
+local TeleportService = game:GetService("TeleportService")
 
 if #Players:GetPlayers() <= 1 then
             Players.LocalPlayer:Kick("\nRejoining...")
