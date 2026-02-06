@@ -1,3 +1,4 @@
+task.wait(1)
 print'did u trigger'
 
 local Players = game.Players
