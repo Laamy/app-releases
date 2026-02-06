@@ -1,4 +1,6 @@
-        local Players = game.Players
+print'did u trigger'
+
+local Players = game.Players
 local TeleportService = game:GetService("TeleportService")
 
 if #Players:GetPlayers() <= 1 then
