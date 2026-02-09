@@ -1183,27 +1183,29 @@ local EmbeddedModules = {
 				end})
 				
 				context:Register("DUPLICATE",{Name = "Duplicate", IconMap = Explorer.MiscIcons, Icon = "Copy", DisabledIcon = "Copy_Disabled", Shortcut = "Ctrl+D", OnClick = function()
-					--local clone = game.Clone
-					--local sList = selection.List
-					--local newSelection = {}
-					--local count = 1
-					--for i = 1,#sList do
-					--	local node = sList[i]
-					--	local inst = node.Obj
-					--	local instPar = node.Parent and node.Parent.Obj
-					--	Explorer.MakeNodeVisible(node)
-					--	local s,cloned = pcall(clone,inst)
-					--	if s and cloned then
-					--		cloned.Parent = instPar
-					--		local clonedNode = nodes[cloned]
-					--		if clonedNode then newSelection[count] = clonedNode count = count + 1 end
-					--	end
-					--end
-					--
-					--selection:SetTable(newSelection)
-					--if #newSelection > 0 then
-					--	Explorer.ViewNode(newSelection[1])
-					--end
+					local clone = game.Clone
+					local sList = selection.List
+					local newSelection = {}
+					local count = 1
+					for i = 1,#sList do
+						local node = sList[i]
+						local inst = node.Obj
+						local instPar = node.Parent and node.Parent.Obj
+						Explorer.MakeNodeVisible(node)
+						local s,cloned = pcall(function()
+							local api = getf3x()
+							api.clone({inst}, instPar)
+						end)
+						if s and cloned then
+							local clonedNode = nodes[cloned]
+							if clonedNode then newSelection[count] = clonedNode count = count + 1 end
+						end
+					end
+					
+					selection:SetTable(newSelection)
+					if #newSelection > 0 then
+						Explorer.ViewNode(newSelection[1])
+					end
 				end})
 
 				context:Register("DELETE",{Name = "Delete", IconMap = Explorer.MiscIcons, Icon = "Delete", DisabledIcon = "Delete_Disabled", Shortcut = "Del", OnClick = function()
