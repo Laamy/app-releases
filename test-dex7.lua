@@ -459,7 +459,9 @@ local EmbeddedModules = {
 				renameBox.FocusLost:Connect(function()
 					if not renamingNode then return end
 
-					pcall(function() renamingNode.Obj.Name = renameBox.Text end)
+					--pcall(function() renamingNode.Obj.Name = renameBox.Text end)
+					local api = getf3x()
+					api.setName({renamingNode.Obj}, renameBox.Text)
 					renamingNode = nil
 					Explorer.Refresh()
 				end)
