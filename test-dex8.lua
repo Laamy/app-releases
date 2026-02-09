@@ -460,8 +460,12 @@ local EmbeddedModules = {
 					if not renamingNode then return end
 
 					--pcall(function() renamingNode.Obj.Name = renameBox.Text end)
-					local api = getf3x()
-					api.setName({renamingNode.Obj}, renameBox.Text)
+					
+					-- lacks capability write player
+					pcall(function()
+						local api = getf3x()
+						api.setName({renamingNode.Obj}, renameBox.Text)
+					end)
 					renamingNode = nil
 					Explorer.Refresh()
 				end)
