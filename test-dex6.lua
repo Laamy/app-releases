@@ -1133,7 +1133,7 @@ local EmbeddedModules = {
 					for i = 1,#sList do
 						local inst = sList[i].Obj
 						newClipboard[count] = inst
-						api.delete(inst)
+						api.delete({inst})
 					end
 					clipboard = newClipboard
 					selection:Clear()
