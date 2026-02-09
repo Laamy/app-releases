@@ -1127,63 +1127,62 @@ local EmbeddedModules = {
 				local context = Lib.ContextMenu.new()
 
 				context:Register("CUT",{Name = "Cut", IconMap = Explorer.MiscIcons, Icon = "Cut", DisabledIcon = "Cut_Disabled", Shortcut = "Ctrl+Z", OnClick = function()
-					--local destroy,clone = game.Destroy,game.Clone
-					--local sList,newClipboard = selection.List,{}
-					--local count = 1
-					--for i = 1,#sList do
-					--	local inst = sList[i].Obj
-					--	local s,cloned = pcall(clone,inst)
-					--	if s and cloned then
-					--		newClipboard[count] = cloned
-					--		count = count + 1
-					--	end
-					--	pcall(destroy,inst)
-					--end
-					--clipboard = newClipboard
-					--selection:Clear()
+					local api = getf3x()
+					local sList,newClipboard = selection.List,{}
+					local count = 1
+					for i = 1,#sList do
+						local inst = sList[i].Obj
+						newClipboard[count] = inst
+						api.delete(inst)
+					end
+					clipboard = newClipboard
+					selection:Clear()
 				end})
 				
 				context:Register("COPY",{Name = "Copy", IconMap = Explorer.MiscIcons, Icon = "Copy", DisabledIcon = "Copy_Disabled", Shortcut = "Ctrl+C", OnClick = function()
-					--local clone = game.Clone
-					--local sList,newClipboard = selection.List,{}
-					--local count = 1
-					--for i = 1,#sList do
-					--	local inst = sList[i].Obj
-					--	local s,cloned = pcall(clone,inst)
-					--	if s and cloned then
-					--		newClipboard[count] = cloned
-					--		count = count + 1
-					--	end
-					--end
-					--clipboard = newClipboard
+					local api = getf3x()
+					local sList,newClipboard = selection.List,{}
+					local count = 1
+					for i = 1,#sList do
+						local inst = sList[i].Obj
+						local cloned = inst
+						if cloned then
+							newClipboard[count] = cloned
+							count = count + 1
+						end
+					end
+					clipboard = newClipboard
 				end})
 				
 				context:Register("PASTE",{Name = "Paste Into", IconMap = Explorer.MiscIcons, Icon = "Paste", DisabledIcon = "Paste_Disabled", Shortcut = "Ctrl+Shift+V", OnClick = function()
-					--local sList = selection.List
-					--local newSelection = {}
-					--local count = 1
-					--for i = 1,#sList do
-					--	local node = sList[i]
-					--	local inst = node.Obj
-					--	Explorer.MakeNodeVisible(node,true)
-					--	for c = 1,#clipboard do
-					--		local cloned = clipboard[c]:Clone()
-					--		if cloned then
-					--			cloned.Parent = inst
-					--			local clonedNode = nodes[cloned]
-					--			if clonedNode then newSelection[count] = clonedNode count = count + 1 end
-					--		end
-					--	end
-					--end
-					--selection:SetTable(newSelection)
-					--
-					--if #newSelection > 0 then
-					--	Explorer.ViewNode(newSelection[1])
-					--end
+					local api = getf3x()
+					local sList = selection.List
+					local newSelection = {}
+					local count = 1
+					for i = 1,#sList do
+						local node = sList[i]
+						local inst = node.Obj
+						Explorer.MakeNodeVisible(node,true)
+						for c = 1,#clipboard do
+							pcall(function()
+								wrapimmedate(function()
+									api.clone({clipboard[c]}, inst)
+								end)
+							end)
+							--if cloned then
+							--	local clonedNode = nodes[cloned]
+							--	if clonedNode then newSelection[count] = clonedNode count = count + 1 end
+							--end
+						end
+					end
+					selection:SetTable(newSelection)
+					
+					if #newSelection > 0 then
+						Explorer.ViewNode(newSelection[1])
+					end
 				end})
 				
 				context:Register("DUPLICATE",{Name = "Duplicate", IconMap = Explorer.MiscIcons, Icon = "Copy", DisabledIcon = "Copy_Disabled", Shortcut = "Ctrl+D", OnClick = function()
-					local clone = game.Clone
 					local sList = selection.List
 					local newSelection = {}
 					local count = 1
@@ -1225,10 +1224,10 @@ local EmbeddedModules = {
 				end})
 
 				context:Register("RENAME",{Name = "Rename", IconMap = Explorer.MiscIcons, Icon = "Rename", DisabledIcon = "Rename_Disabled", Shortcut = "F2", OnClick = function()
-					--local sList = selection.List
-					--if sList[1] then
-					--	Explorer.SetRenamingNode(sList[1])
-					--end
+					local sList = selection.List
+					if sList[1] then
+						Explorer.SetRenamingNode(sList[1])
+					end
 				end})
 				
 				context:Register("GROUP",{Name = "Group", IconMap = Explorer.MiscIcons, Icon = "Group", DisabledIcon = "Group_Disabled", Shortcut = "Ctrl+G", OnClick = function()
@@ -1501,9 +1500,9 @@ local EmbeddedModules = {
 				end})
 
 				context:Register("INSERT_OBJECT",{Name = "Insert Object", IconMap = Explorer.MiscIcons, Icon = "InsertObject", OnClick = function()
-					--local mouse = Main.Mouse
-					--local x,y = Explorer.LastRightClickX or mouse.X, Explorer.LastRightClickY or mouse.Y
-					--Explorer.InsertObjectContext:Show(x,y)
+					local mouse = Main.Mouse
+					local x,y = Explorer.LastRightClickX or mouse.X, Explorer.LastRightClickY or mouse.Y
+					Explorer.InsertObjectContext:Show(x,y)
 				end})
 
 				--[[context:Register("CALL_FUNCTION",{Name = "Call Function", IconMap = Explorer.ClassIcons, Icon = 66, OnClick = function()
