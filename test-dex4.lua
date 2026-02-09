@@ -1192,14 +1192,16 @@ local EmbeddedModules = {
 						local inst = node.Obj
 						local instPar = node.Parent and node.Parent.Obj
 						Explorer.MakeNodeVisible(node)
-						local s,cloned = pcall(function()
-							local api = getf3x()
-							api.clone({inst}, instPar)
+						pcall(function()
+							wrapimmedate(function()
+								local api = getf3x()
+								api.clone({inst}, instPar)
+							end)
 						end)
-						if s and cloned then
-							local clonedNode = nodes[cloned]
-							if clonedNode then newSelection[count] = clonedNode count = count + 1 end
-						end
+						--if s and cloned then
+						--	local clonedNode = nodes[cloned]
+						--	if clonedNode then newSelection[count] = clonedNode count = count + 1 end
+						--end
 					end
 					
 					selection:SetTable(newSelection)
