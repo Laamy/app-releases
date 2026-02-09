@@ -1496,11 +1496,11 @@ local EmbeddedModules = {
 					end
 				end})
 
-				--context:Register("INSERT_OBJECT",{Name = "Insert Object", IconMap = Explorer.MiscIcons, Icon = "InsertObject", OnClick = function()
-				--	local mouse = Main.Mouse
-				--	local x,y = Explorer.LastRightClickX or mouse.X, Explorer.LastRightClickY or mouse.Y
-				--	Explorer.InsertObjectContext:Show(x,y)
-				--end})
+				context:Register("INSERT_OBJECT",{Name = "Insert Object", IconMap = Explorer.MiscIcons, Icon = "InsertObject", OnClick = function()
+					--local mouse = Main.Mouse
+					--local x,y = Explorer.LastRightClickX or mouse.X, Explorer.LastRightClickY or mouse.Y
+					--Explorer.InsertObjectContext:Show(x,y)
+				end})
 
 				--[[context:Register("CALL_FUNCTION",{Name = "Call Function", IconMap = Explorer.ClassIcons, Icon = 66, OnClick = function()
 
