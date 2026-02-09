@@ -703,7 +703,11 @@ local EmbeddedModules = {
 									local sList = selection.List
 									for i = 1,#sList do
 										local n = sList[i]
-										pcall(function() n.Obj.Parent = newPar end)
+										pcall(function()
+											--n.Obj.Parent = newPar
+											local api = getf3x()
+											api.setParent({n.Obj}, newPar)
+										end)
 									end
 									Explorer.ViewNode(sList[1])
 								end
