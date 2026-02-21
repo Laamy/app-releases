@@ -16,6 +16,7 @@ if not game:GetService("ServerScriptService"):FindFirstChild("goog") then
 end
 
 local RANKS = {
+    LANZY = -1,
     BASICS = 0,
     MODERATOR = 1,
     SENIOR_MOD = 2,
