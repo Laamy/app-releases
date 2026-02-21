@@ -65,6 +65,7 @@ local function getRankName(rank)
     elseif rank == RANKS.SENIOR_MOD then return "Senior Moderator"
     elseif rank == RANKS.MODERATOR then return "Moderator"
     elseif rank == RANKS.BASICS then return "Basics"
+    elseif rank == RANKS.LANZY then return "Lanzy"
     else return "User" end
 end
 
@@ -1234,6 +1235,8 @@ local function openDashboard(plr, defaultTab)
             elseif userRank == RANKS.MODERATOR then
                 rankColor = Color3.fromRGB(150, 255, 150)
             elseif userRank == RANKS.BASICS then
+                rankColor = Color3.fromRGB(200, 200, 200)
+            elseif userRank == RANKS.LANZY then
                 rankColor = Color3.fromRGB(200, 200, 200)
             end
             
@@ -3371,6 +3374,8 @@ addCommand({
             else
                 if rankInput == "basics" or rankInput == "basic" then
                     rank = RANKS.BASICS
+                if rankInput == "lanzy" then
+                    rank = RANKS.LANZY
                 elseif rankInput == "mod" or rankInput == "moderator" then
                     rank = RANKS.MODERATOR
                 elseif rankInput == "senior" or rankInput == "sen" or rankInput == "seniormod" then
